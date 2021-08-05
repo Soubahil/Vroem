@@ -14,8 +14,6 @@ public class App {
     private static boolean continueThis = true;
 
     public static void main(String[] args) {
-        System.out.println("Welcome to our school app!");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~");
         try {
             while (continueThis){
                 getChoice();
@@ -29,10 +27,14 @@ public class App {
     public static void getChoice(){
         Scanner scanner = new Scanner(System.in);
         while (choiceOne == 9) {
-            System.out.println("What do you want to look at? \n1. Product lines \n2. Products \n0. Exit");
+            System.out.println("~~~ VROEM ~~~ \nWhat do you want to look at? \n1. Product lines \n2. Products \n0. Exit");
             do {
                 try {
                     choiceOne = scanner.nextInt();
+                    if(choiceOne < 0 || choiceOne > 2){
+                        choiceOne = 9;
+                        System.err.println("Invalid choice, try again. (0 to exit)");
+                    }
                 } catch (InputMismatchException e) {
                     System.err.println("Invalid choice, try again. (0 to exit)");
                 }
@@ -40,27 +42,23 @@ public class App {
             } while (choiceOne == 9);
             if(choiceOne == 0)
                 break;
-            if(choiceOne < 1 || choiceOne > 2){
-                choiceOne = 9;
-                System.err.println("Invalid choice, try again. (0 to exit)");
-            }
             else {
                 while (choiceOne == 1 && choiceTwo == 9) {
-                    System.out.println("What do you want to do? \n1. Show all product lines. \n2. Show product line by name. \n3: Add product line. \n4: Edit product line. \n5. Remove product line.\n0: Return to main menu.");
+                    System.out.println("~~~ Product Lines ~~~ \nWhat do you want to do? \n1. Show all product lines. \n2. Show product line by name. \n3: Add product line. \n4: Edit product line. \n5. Remove product line.\n0: Return to main menu.");
                     do {
                         try {
                             choiceTwo = scanner.nextInt();
+                            if(choiceTwo < 0 ||choiceTwo > 5){
+                                choiceTwo = 9;
+                                System.err.println("Invalid choice, try again. (0 to return to main menu)");
+                            }
                         } catch (InputMismatchException e) {
-                            System.err.println("Invalid choice, try again.");
+                            System.err.println("Invalid choice, try again. (0 to return to main menu)");
                         }
                         scanner.nextLine();
                     } while (choiceTwo == 9);
                     if (choiceTwo == 0)
                         break;
-                    if(choiceTwo < 1 ||choiceTwo > 5){
-                        choiceTwo = 9;
-                        System.err.println("Invalid choice, try again");
-                    }
                 }
             }
         }

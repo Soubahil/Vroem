@@ -75,7 +75,6 @@ public class ProductLineService {
             while (true) {
                 String input = scanner.nextLine();
                 ProductLine productLine = productLineDAO.getProductLineByName(input);
-                boolean keepOnGoing;
                 if (input.equals("0")) {
                     System.out.println("~ ACTION CANCELLED ~");
                     break;
@@ -85,31 +84,48 @@ public class ProductLineService {
                     System.out.println("Insert the name of the product line that you want to edit: \n- X to show all product lines. \n- 0 to cancel.");
                 } else if (productLine != null) {
                     System.out.println("What do you want to edit? \n1. Change the name of the product line. \n2. Change the description of the product line. \n3. Change the html description. \n0. Cancel");
-                    do {
+                    while (true){
                         try {
                             int choice = scanner.nextInt();
                             if (choice == 1) {
-                                setProductLine();
-                                break;
+                                scanner.nextLine();
+                                productLineDAO.deleteProductLine(productLine);
+                                String pl = setProductLine();
+                                if(pl.equals("0"))
+                                    return;
+                                productLine.setProductLine(pl);
+                                productLineDAO.updateProductLine(productLine);
+                                System.out.println("~ NAME UPDATED ~");
+                                return;
                             } else if (choice == 2) {
-                                setTextDescription();
-                                break;
+                                scanner.nextLine();
+                                String td = setTextDescription();
+                                if(td.equals("0"))
+                                    return;
+                                productLine.setTextDescription(td);
+                                productLineDAO.updateProductLine(productLine);
+                                System.out.println("~ TEXT DESCRIPTION UPDATED ~");
+                                return;
                             } else if (choice == 3) {
-                                setHtmlDescription();
-                                break;
+                                scanner.nextLine();
+                                String hd = setHtmlDescription();
+                                if(hd.equals("0"))
+                                    return;
+                                productLine.setHtmlDescription(hd);
+                                productLineDAO.updateProductLine(productLine);
+                                System.out.println("~ HTML DESCRIPTION UPDATED ~");
+                                return;
                             } else if (choice == 0) {
                                 scanner.nextLine();
                                 System.out.println("~ ACTION CANCELLED ~");
-                                break;
+                                return;
                             } else
                                 System.err.println("Invalid choice, try again. (0 to cancel)");
                         } catch (InputMismatchException e) {
                             System.err.println("Invalid choice, try again. (0 to cancel)");
                         }
                         scanner.nextLine();
-                        System.out.println("Do you want to continue editing this product line? Yes/No");
-                        keepOnGoing = sharedService.yesNo();
-                    } while (keepOnGoing);
+                    }
                 } else System.err.println("No product line linked to that name, try again. (X to show all product lines - O to cancel)");
             }
         } else {
@@ -152,9 +168,9 @@ public class ProductLineService {
 
     //
 
-    public boolean lacksRequirementsUserName(String productLine) {
+    public boolean lacksRequirementsName(String productLine) {
         boolean lacksReq = true;
-        if(productLine.length() >= 2 && productLine.length() >= 50) {
+        if(productLine.length() > 1 && productLine.length() < 51) {
             Pattern letter = Pattern.compile("[a-zA-z]");
             Pattern special = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~]");
             Matcher hasLetter = letter.matcher(productLine);
@@ -170,7 +186,7 @@ public class ProductLineService {
     public String setProductLine() {
         String productLine;
         boolean isUnique;
-        System.out.println("Insert the name that you want to use for your product line: \n- Between 2 and 50 characters. \n- Must have at least 2 alphabetic characters. \n- Can't contain special characters (except '-'). \n- 0 to cancel. ");
+        System.out.println("Insert the name that you want to use for your product line: \n- Between 2 and 50 characters. \n- Must have at least 2 alphabetic characters. \n- Can't contain special characters. (except '-') \n- 0 to cancel. ");
         do {
             productLine = scanner.nextLine();
             isUnique = true;
@@ -178,7 +194,7 @@ public class ProductLineService {
                 System.out.println("~ ACTION CANCELLED ~");
                 break;
             }
-            if (lacksRequirementsUserName(productLine))
+            if (lacksRequirementsName(productLine))
                 System.err.println("Product line name doesn't meet the requirements, try again. (0 to cancel)");
             for (ProductLine pl : productLineDAO.getAllProductLines()) {
                 if (pl.getProductLine().equalsIgnoreCase(productLine)) {
@@ -186,7 +202,7 @@ public class ProductLineService {
                     isUnique = false;
                 }
             }
-        } while (lacksRequirementsUserName(productLine) || (!isUnique));
+        } while (lacksRequirementsName(productLine) || (!isUnique));
         return productLine;
     }
 
