@@ -1,4 +1,4 @@
-package application;
+package be.intecbrussel.application;
 
 import be.intecbrussel.services.ProductLineService;
 
