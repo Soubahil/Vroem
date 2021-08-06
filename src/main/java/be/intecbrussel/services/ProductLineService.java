@@ -1,7 +1,7 @@
-package service;
+package be.intecbrussel.services;
 
-import data.ProductLineDAO;
-import model.ProductLine;
+import be.intecbrussel.data.ProductLineDAO;
+import be.intecbrussel.entities.ProductLine;
 import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;

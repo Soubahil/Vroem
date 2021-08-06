@@ -1,7 +1,7 @@
-package data;
+package be.intecbrussel.data;
 
-import model.Product;
-import model.ProductLine;
+import be.intecbrussel.entities.Product;
+import be.intecbrussel.entities.ProductLine;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

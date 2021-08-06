@@ -1,6 +1,6 @@
 package application;
 
-import service.ProductLineService;
+import be.intecbrussel.services.ProductLineService;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;

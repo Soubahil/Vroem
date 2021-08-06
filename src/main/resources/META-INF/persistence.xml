@@ -4,9 +4,9 @@
 
     <persistence-unit name="vroemDatabase">
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/classicmodels"/>
-            <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="Root123!" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://moktok.intecbrussel.org:33062/vroemDatabase"/>
+            <property name="javax.persistence.jdbc.user" value="vroem123"/>
+            <property name="javax.persistence.jdbc.password" value="vroem123" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>

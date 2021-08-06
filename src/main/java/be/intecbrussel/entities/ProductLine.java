@@ -1,10 +1,12 @@
-package model;
+package be.intecbrussel.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.sql.Blob;
 
 @Entity
+@Table(name = "productlines")
 public class ProductLine {
 
     @Id

@@ -1,6 +1,6 @@
-package data;
+package be.intecbrussel.data;
 
-import model.ProductLine;
+import be.intecbrussel.entities.ProductLine;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,6 +16,7 @@ public class ProductLineDAO {
 
     public List<ProductLine> getAllProductLines() {
         EntityManager em = emf.createEntityManager();
+//        return em.createQuery("SELECT p FROM ProductLine p").getResultList();
         return em.createQuery("FROM ProductLine", ProductLine.class).getResultList();
     }
 

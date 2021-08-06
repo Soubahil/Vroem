@@ -1,4 +1,4 @@
-package data;
+package be.intecbrussel.data;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

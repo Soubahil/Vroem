@@ -1,4 +1,4 @@
-package service;
+package be.intecbrussel.services;
 
 import java.util.Scanner;
 
