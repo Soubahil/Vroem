@@ -18,11 +18,11 @@ public class ProductLine {
     public ProductLine() {
     }
 
-    public ProductLine(String productLine, String textDescription, String htmlDescription) {
+    public ProductLine(String productLine, String textDescription, String htmlDescription, Blob image) {
         this.productLine = productLine;
         this.textDescription = textDescription;
         this.htmlDescription = htmlDescription;
-//        this.image = image;
+        this.image = image;
     }
 
     public String getProductLine() {
@@ -59,11 +59,17 @@ public class ProductLine {
 
     @Override
     public String toString() {
-        return "ProductLine{" +
-                "productLine='" + productLine + '\'' +
-                ", textDescription='" + textDescription + '\'' +
-                ", htmlDescription='" + htmlDescription + '\'' +
-                ", image='" + image + '\'' +
-                '}';
+        String outputString = "Product line     : " + this.productLine;
+        if (this.textDescription != null)
+            outputString += "\nDescription      : " + this.textDescription;
+        else outputString += "\nDescription      : NO DESCRIPTION FOUND";
+        if (this.htmlDescription != null)
+            outputString += "\nHTML description : " + this.htmlDescription;
+        else outputString += "\nHTML description : NO DESCRIPTION FOUND";
+        if (this.image != null) {
+            outputString += "\nImage blob code  : " + this.image + "\n";
+        }
+        else outputString += "\nImage            : NO IMAGE FOUND \n";
+        return outputString;
     }
 }

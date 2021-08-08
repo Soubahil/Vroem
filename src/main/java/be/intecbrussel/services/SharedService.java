@@ -18,9 +18,7 @@ public class SharedService {
                 keepOnGoing = true;
             else if(input.equalsIgnoreCase("no")) {
                 keepOnGoing = false;
-            }
-            else
-                System.err.println(input + " is not a good answer, try again.");
+            } else System.err.println(input + " is not a good answer, try again.");
         } while (!input.equalsIgnoreCase("yes") && !input.equalsIgnoreCase("no"));
         return keepOnGoing;
     }
